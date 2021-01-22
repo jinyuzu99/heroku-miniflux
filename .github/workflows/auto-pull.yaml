@@ -20,7 +20,7 @@ jobs:
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
-          rm -rf .git
+          rm -rf .git readme.md
           mv ./* ..
           cd ..
           rm -rf v2
