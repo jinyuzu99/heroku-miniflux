@@ -14,7 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
+        with:
+          repository: ${{ github.repository }}
+          token: ${{ github.token }}
+          path: heroku-miniflux
+      - name: get latest stable to main
+        run: |
+          cd heroku-miniflux
           git checkout main
           git clone https://github.com/miniflux/v2.git
           cd v2
@@ -23,6 +29,8 @@ jobs:
           mv ./* ..
           cd ..
           rm -rf v2
+      - name: push
+        run: |
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
