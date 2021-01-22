@@ -6,23 +6,19 @@ jobs:
     pull:
         runs-on: ubuntu-latest
         steps:
-            - name: clone latest stable
-              run: |
-                git checkout main
-                git clone https://github.com/miniflux/v2.git
-                cd v2
-                git checkout $(git describe --tags --abbrev=0)
-                rm -rf .git
-                mv ./* ..
-                cd ..
-                rm -rf v2
-
-            - name: push to main
-              uses: actions/checkout@v2
-              run: |
-                date > generated.txt
-                git config user.name github-actions
-                git config user.email github-actions@github.com
-                git add .
-                git commit -m "generated"
-                git push
+            - uses: actions/checkout@v2
+            - run: |
+                  git checkout main
+                  git clone https://github.com/miniflux/v2.git
+                  cd v2
+                  git checkout $(git describe --tags --abbrev=0)
+                  rm -rf .git
+                  mv ./* ..
+                  cd ..
+                  rm -rf v2
+                  date > generated.txt
+                  git config user.name github-actions
+                  git config user.email github-actions@github.com
+                  git add .
+                  git commit -m "generated"
+                  git push
