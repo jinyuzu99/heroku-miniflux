@@ -3,12 +3,11 @@
 	"description": "Minimalist and opinionated feed reader",
 	"repository": "https://github.com/miniflux/v2",
 	"logo": "https://miniflux.app/favicon.ico",
-	"success_url": "/",
 	"addons": ["heroku-postgresql:hobby-dev"],
 	"env": {
 		"RUN_MIGRATIONS": "1",
 		"CREATE_ADMIN": "1",
 		"ADMIN_USERNAME": "admin",
-		"ADMIN_PASSWORD": ""
+		"ADMIN_PASSWORD": "test123"
 	}
 }
