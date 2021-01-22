@@ -2,10 +2,10 @@ name: auto-pull
 on:
   push:
     branches:
-      - docs
+      - action
   pull_request:
     branches:
-      - docs
+      - action
   schedule:
     - cron: '0 0 1 * *'
 
@@ -26,10 +26,9 @@ jobs:
           rm -rf v2
       - name: push
         run: |
-          date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "generated"
+          git commit -m date
           git push -d origin main
           git push origin main
