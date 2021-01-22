@@ -27,6 +27,7 @@ jobs:
           rm -rf v2
       - name: push
         run: |
+          git push --set-upstream origin main
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
