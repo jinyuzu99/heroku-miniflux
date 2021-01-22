@@ -4,7 +4,7 @@ deploy with button
 	https://heroku.com/deploy
 
 deploy with cli
-	$ bash ./heroku-cli.sh
+	bash ./heroku-cli.sh
 
 enable auto update
 	1. deploy app with button or cli
