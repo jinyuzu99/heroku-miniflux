@@ -15,10 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: git
       - name: get latest stable to main
         run: |
-          cd git
           git fetch --all
           git switch main
           git clone https://github.com/miniflux/v2.git
@@ -30,7 +28,6 @@ jobs:
           rm -rf v2
       - name: push
         run: |
-          cd git
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
