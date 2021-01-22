@@ -15,8 +15,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          repository: ${{ github.repository }}
-          token: ${{ github.token }}
           path: heroku-miniflux
       - name: get latest stable to main
         run: |
