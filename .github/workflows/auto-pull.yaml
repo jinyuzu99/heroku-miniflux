@@ -19,7 +19,8 @@ jobs:
       - name: get latest stable to main
         run: |
           cd heroku-miniflux
-          git checkout main
+          git fetch --all
+          git switch main
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
