@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: get latest stable to main
         run: |
-          git checkout -bf main
+          git checkout -B main
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
