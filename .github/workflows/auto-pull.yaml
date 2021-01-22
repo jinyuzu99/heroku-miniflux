@@ -16,8 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: get latest stable to main
         run: |
-          git fetch --all
-          git checkout -B main
+          git checkout -bf main
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
@@ -32,4 +31,4 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "generated"
-          git push --set-upstream origin main
+          git push --set-upstream origin -d main
