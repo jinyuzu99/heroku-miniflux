@@ -31,5 +31,5 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit -m "generated"
-          git push origin -d main
-          git push --set-upstream origin main
+          git push -d main
+          git push origin main
