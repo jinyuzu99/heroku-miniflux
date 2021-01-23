@@ -7,7 +7,7 @@ on:
     branches:
       - action
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 * * 0'
 
 jobs:
   pull:
@@ -16,14 +16,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: get latest stable to main
         run: |
-          git fetch --all
-          git switch main
-          (GLOBIGNORE='.git'; rm -rf *)
+          git checkout -B main
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
           rm -rf .git README.md
-          mv ./* ..
+          mv * ..
           cd ..
           rm -rf v2
       - name: push
