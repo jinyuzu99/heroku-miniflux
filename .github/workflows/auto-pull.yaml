@@ -19,15 +19,11 @@ jobs:
           git fetch --all
           git switch main
           GLOBIGNORE=.git; rm -rf *
-          git switch action
-          git checkout -b main
           git clone https://github.com/miniflux/v2.git
           cd v2
           git checkout $(git describe --tags --abbrev=0)
-          rm -rf .git README.md
-          mv * ..
-          cd ..
-          rm -rf v2
+          rm -rf .git README.md; mv * ..; cd ..; rm -rf v2
+          git merge action
       - name: push
         run: |
           git config user.name github-actions
