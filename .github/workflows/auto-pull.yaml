@@ -19,7 +19,7 @@ jobs:
           git push origin action:main -f
           git fetch --all
           git switch main
-          git pull https://github.com/miniflux/v2.git/master
+          git pull https://github.com/miniflux/v2.git; cd v2
           git checkout $(git describe --tags --abbrev=0)
           rm -rf .git README.md; mv * ..; cd ..; rm -rf v2
       - name: push
