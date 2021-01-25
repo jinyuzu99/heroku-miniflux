@@ -1,3 +1,5 @@
+must deploy in main branch
+
 deploy with button
 	https://heroku.com/deploy
 
