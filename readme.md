@@ -1,11 +1,11 @@
 ## guide
 
 1. switch to [main branch](../../tree/main)
-2. deploy with [button](https://heroku.com/deploy)
+2. deploy with [heroku button](https://heroku.com/deploy)
 
 ## enable auto update
 
-1. deploy app with button or cli
+1. deploy app as above
 2. fork this repo on github
 3. enable github action
 4. go to heroku dashboard, then choose your app
