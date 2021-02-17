@@ -3,7 +3,7 @@
 1. switch to [main branch](../../tree/main)
 2. deploy with [heroku button](https://heroku.com/deploy)
 
-## enable auto update
+## auto update
 
 1. deploy app as above
 2. **fork** this repo
