@@ -5,9 +5,11 @@
 	"logo": "https://miniflux.app/favicon.ico",
 	"addons": ["heroku-postgresql:hobby-dev"],
 	"env": {
-		"RUN_MIGRATIONS": "1",
-		"CREATE_ADMIN": "1",
 		"ADMIN_USERNAME": "admin",
-		"ADMIN_PASSWORD": "test123"
+		"ADMIN_PASSWORD": "test123",
+		"CREATE_ADMIN": "1",
+		"RUN_MIGRATIONS": "1",
+		"CLEANUP_ARCHIVE_READ_DAYS": "7",
+		"CLEANUP_ARCHIVE_UNREAD_DAYS": "30"
 	}
 }
