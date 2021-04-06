@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: get latest stable to main
         run: |
+          git checkout action
           git push origin action:main -f
           git fetch --all
           git switch main
