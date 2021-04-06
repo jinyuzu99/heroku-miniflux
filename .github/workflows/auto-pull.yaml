@@ -13,7 +13,7 @@ jobs:
   pull:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.4
       - name: get latest stable to main
         run: |
           git checkout action
