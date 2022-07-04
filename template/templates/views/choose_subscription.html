@@ -1,0 +1,43 @@
+{{ define "title"}}{{ t "page.add_feed.title" }}{{ end }}
+
+{{ define "content"}}
+<section class="page-header">
+    <h1>{{ t "page.add_feed.title" }}</h1>
+    {{ template "feed_menu" }}
+</section>
+
+<form action="{{ route "chooseSubscription" }}" method="POST">
+    <input type="hidden" name="csrf" value="{{ .csrf }}">
+    <input type="hidden" name="category_id" value="{{ .form.CategoryID }}">
+    <input type="hidden" name="user_agent" value="{{ .form.UserAgent }}">
+    <input type="hidden" name="cookie" value="{{ .form.Cookie }}">
+    <input type="hidden" name="feed_username" value="{{ .form.Username }}">
+    <input type="hidden" name="feed_password" value="{{ .form.Password }}">
+    <input type="hidden" name="scraper_rules" value="{{ .form.ScraperRules }}">
+    <input type="hidden" name="rewrite_rules" value="{{ .form.RewriteRules }}">
+    <input type="hidden" name="blocklist_rules" value="{{ .form.BlocklistRules }}">
+    <input type="hidden" name="keeplist_rules" value="{{ .form.KeeplistRules }}">
+    {{ if .form.FetchViaProxy }}
+    <input type="hidden" name="fetch_via_proxy" value="1">
+    {{ end }}
+    {{ if .form.Crawler }}
+        <input type="hidden" name="crawler" value="1">
+    {{ end }}
+    {{ if .form.AllowSelfSignedCertificates }}
+        <input type="hidden" name="allow_self_signed_certificates" value="1">
+    {{ end }}
+
+    <h3>{{ t "page.add_feed.choose_feed" }}</h3>
+
+    {{ range .subscriptions }}
+        <div class="radio-group">
+            <label title="{{ .URL | safeURL  }}"><input type="radio" name="url" value="{{ .URL | safeURL  }}"> {{ .Title }}</label> ({{ .Type }})
+            <small title="Type = {{ .Type }}"><a href="{{ .URL | safeURL  }}" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">{{ .URL | safeURL  }}</a></small>
+        </div>
+    {{ end }}
+
+    <div class="buttons">
+        <button type="submit" class="button button-primary" data-label-loading="{{ t "form.submit.loading" }}">{{ t "action.subscribe" }}</button>
+    </div>
+</form>
+{{ end }}

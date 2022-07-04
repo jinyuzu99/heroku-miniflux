@@ -1,0 +1,38 @@
+{{ define "title"}}{{ t "page.sessions.title" }}{{ end }}
+
+{{ define "content"}}
+<section class="page-header">
+    <h1>{{ t "page.sessions.title" }}</h1>
+    {{ template "settings_menu" dict "user" .user }}
+</section>
+
+<table>
+    <tr>
+        <th>{{ t "page.sessions.table.date" }}</th>
+        <th>{{ t "page.sessions.table.ip" }}</th>
+        <th>{{ t "page.sessions.table.user_agent" }}</th>
+        <th>{{ t "page.sessions.table.actions" }}</th>
+    </tr>
+    {{ range .sessions }}
+    <tr {{ if eq .Token $.currentSessionToken }}class="row-highlighted"{{ end }}>
+        <td class="column-20" title="{{ isodate .CreatedAt }}">{{ elapsed $.user.Timezone .CreatedAt }}</td>
+        <td class="column-20" title="{{ .IP }}">{{ .IP }}</td>
+        <td title="{{ .UserAgent }}">{{ .UserAgent }}</td>
+        <td class="column-20">
+            {{ if eq .Token $.currentSessionToken }}
+                {{ t "page.sessions.table.current_session" }}
+            {{ else }}
+                <a href="#"
+                    data-confirm="true"
+                    data-label-question="{{ t "confirm.question" }}"
+                    data-label-yes="{{ t "confirm.yes" }}"
+                    data-label-no="{{ t "confirm.no" }}"
+                    data-label-loading="{{ t "confirm.loading" }}"
+                    data-url="{{ route "removeSession" "sessionID" .ID }}">{{ icon "delete" }}{{ t "action.remove" }}</a>
+            {{ end }}
+        </td>
+    </tr>
+    {{ end }}
+</table>
+
+{{ end }}

@@ -1,0 +1,39 @@
+{{ define "title"}}{{ t "page.about.title" }}{{ end }}
+
+{{ define "content"}}
+<section class="page-header">
+    <h1>{{ t "page.about.title" }}</h1>
+    {{ template "settings_menu" dict "user" .user }}
+</section>
+
+<div class="panel">
+    <h3>Miniflux</h3>
+    <ul>
+        <li><strong>{{ t "page.about.version" }}</strong> {{ .version }}</li>
+        <li><strong>Git Commit</strong> {{ .commit }}</li>
+        <li><strong>{{ t "page.about.build_date" }}</strong> {{ .build_date }}</li>
+        {{ if .user.IsAdmin }}<li><strong>{{ t "page.about.postgres_version" }}</strong> {{ .postgres_version }}</li>{{ end }}
+	<li><strong>{{t "page.about.go_version" }}</strong> {{ .go_version }}</li>
+    </ul>
+</div>
+
+<div class="panel">
+    <h3>{{ t "page.about.credits" }}</h3>
+    <ul>
+        <li><strong>{{ t "page.about.author" }}</strong> Frédéric Guillot</li>
+        <li><strong>{{ t "page.about.license" }}</strong> Apache 2.0</li>
+    </ul>
+</div>
+
+{{ if .user.IsAdmin }}
+<div class="panel">
+    <h3>{{ t "page.about.global_config_options" }}</h3>
+    <ul>
+    {{ range .globalConfigOptions }}
+    <li><code><strong>{{ .Key }}</strong>={{ .Value }}</code></li>
+    {{ end }}
+    </ul>
+</div>
+{{ end }}
+
+{{ end }}

@@ -1,0 +1,52 @@
+{{ define "title"}}{{ t "page.users.title" }}{{ end }}
+
+{{ define "content"}}
+<section class="page-header">
+    <h1>{{ t "page.users.title" }}</h1>
+    {{ template "settings_menu" dict "user" .user }}
+</section>
+
+{{ if eq (len .users) 1 }}
+    <p class="alert">{{ t "alert.no_user" }}</p>
+{{ else }}
+    <table>
+        <tr>
+            <th class="column-20">{{ t "page.users.username" }}</th>
+            <th>{{ t "page.users.is_admin" }}</th>
+            <th>{{ t "page.users.last_login" }}</th>
+            <th>{{ t "page.users.actions" }}</th>
+        </tr>
+        {{ range .users }}
+            {{ if ne .ID $.user.ID }}
+            <tr>
+                <td>{{ .Username }}</td>
+                <td>{{ if eq .IsAdmin true }}{{ t "page.users.admin.yes" }}{{ else }}{{ t "page.users.admin.no" }}{{ end }}</td>
+                <td>
+                    {{ if .LastLoginAt }}
+                        <time datetime="{{ isodate .LastLoginAt }}" title="{{ isodate .LastLoginAt }}">{{ elapsed $.user.Timezone .LastLoginAt }}</time>
+                    {{ else }}
+                        {{ t "page.users.never_logged" }}
+                    {{ end }}
+                </td>
+                <td>
+                    <a href="{{ route "editUser" "userID" .ID }}">{{ t "action.edit" }}</a>,
+                    <a href="#"
+                        data-confirm="true"
+                        data-label-question="{{ t "confirm.question" }}"
+                        data-label-yes="{{ t "confirm.yes" }}"
+                        data-label-no="{{ t "confirm.no" }}"
+                        data-label-loading="{{ t "confirm.loading" }}"
+                        data-url="{{ route "removeUser" "userID" .ID }}">{{ t "action.remove" }}</a>
+                </td>
+            </tr>
+            {{ end }}
+        {{ end }}
+    </table>
+    <br>
+{{ end }}
+
+<p>
+    <a href="{{ route "createUser" }}" class="button button-primary">{{ t "menu.add_user" }}</a>
+</p>
+
+{{ end }}
