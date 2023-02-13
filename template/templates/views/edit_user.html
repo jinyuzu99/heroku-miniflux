@@ -1,0 +1,31 @@
+{{ define "title"}}{{ t "page.edit_user.title" .selected_user.Username }}{{ end }}
+
+{{ define "content"}}
+<section class="page-header">
+    <h1>{{ t "page.edit_user.title" .selected_user.Username }}</h1>
+    {{ template "settings_menu" dict "user" .user }}
+</section>
+
+<form action="{{ route "updateUser" "userID" .selected_user.ID }}" method="post" autocomplete="off">
+    <input type="hidden" name="csrf" value="{{ .csrf }}">
+
+    {{ if .errorMessage }}
+        <div class="alert alert-error">{{ t .errorMessage }}</div>
+    {{ end }}
+
+    <label for="form-username">{{ t "form.user.label.username" }}</label>
+    <input type="text" name="username" id="form-username" value="{{ .form.Username }}" autocomplete="username" spellcheck="false" required autofocus>
+
+    <label for="form-password">{{ t "form.user.label.password" }}</label>
+    <input type="password" name="password" id="form-password" value="{{ .form.Password }}" autocomplete="new-password">
+
+    <label for="form-confirmation">{{ t "form.user.label.confirmation" }}</label>
+    <input type="password" name="confirmation" id="form-confirmation" value="{{ .form.Confirmation }}" autocomplete="new-password">
+
+    <label><input type="checkbox" name="is_admin" value="1" {{ if .form.IsAdmin }}checked{{ end }}> {{ t "form.user.label.admin" }}</label>
+
+    <div class="buttons">
+        <button type="submit" class="button button-primary" data-label-loading="{{ t "form.submit.saving" }}">{{ t "action.update" }}</button> {{ t "action.or" }} <a href="{{ route "users" }}">{{ t "action.cancel" }}</a>
+    </div>
+</form>
+{{ end }}
