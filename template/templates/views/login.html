@@ -1,0 +1,35 @@
+{{ define "title"}}{{ t "page.login.title" }}{{ end }}
+
+{{ define "content"}}
+<section class="login-form">
+    <form action="{{ route "checkLogin" }}" method="post">
+        <input type="hidden" name="csrf" value="{{ .csrf }}">
+
+        {{ if .errorMessage }}
+            <div class="alert alert-error">{{ t .errorMessage }}</div>
+        {{ end }}
+
+        <label for="form-username">{{ t "form.user.label.username" }}</label>
+        <input type="text" name="username" id="form-username" value="{{ .form.Username }}" autocomplete="username" required autofocus>
+
+        <label for="form-password">{{ t "form.user.label.password" }}</label>
+        <input type="password" name="password" id="form-password" value="{{ .form.Password }}" autocomplete="current-password" required>
+
+        <div class="buttons">
+            <button type="submit" class="button button-primary" data-label-loading="{{ t "form.submit.loading" }}">{{ t "action.login" }}</button>
+        </div>
+    </form>
+    {{ if hasOAuth2Provider "google" }}
+    <div class="oauth2">
+        <a href="{{ route "oauth2Redirect" "provider" "google" }}">{{ t "page.login.google_signin" }}</a>
+    </div>
+    {{ else if hasOAuth2Provider "oidc" }}
+    <div class="oauth2">
+        <a href="{{ route "oauth2Redirect" "provider" "oidc" }}">{{ t "page.login.oidc_signin" }}</a>
+    </div>
+    {{ end }}
+</section>
+<footer id="prompt-home-screen">
+    <a href="#" id="btn-add-to-home-screen" role="button">{{ icon "home" }}<span class="icon-label">{{ t "action.home_screen" }}</span></a>
+</footer>
+{{ end }}
